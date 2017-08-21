@@ -1,0 +1,52 @@
+GOALS :
+	PERFORM constraints_test01 :UTILITY 10;
+	PERFORM constraints_test02 :UTILITY 5;
+	PERFORM constraints_test03 :UTILITY 1;
+	
+FACTS : 
+	FACT on("box_A", "table");
+	FACT isFree("robot", "true");
+
+PLAN PERFORM constraints_test01{
+PRECONDITION : 
+	FACT on("box_A", "table");
+	
+//CONTEXT :
+	//FACT isFree("robot", "true");
+	//System.out.println("CONTEXT check");
+	
+BODY : 
+	System.out.println("---------Start constraints_test01---------");
+
+	System.out.println("---------constraints_test01 succeed---------");
+
+EFFECTS :
+	ASSERT graspedBy("box_A", "robot");
+	RETRACT on("box_A", "table");
+
+}
+
+PLAN PERFORM constraints_test02{
+PRECONDITION : 
+	FACT graspedBy("box_A", "robot");
+	
+BODY : 
+	System.out.println("---------Start constraints_test02---------");
+
+	System.out.println("---------constraints_test02 succeed---------");
+
+}
+
+PLAN PERFORM constraints_test03{
+PRECONDITION : 
+	FACT on("box_A", "table");
+	
+BODY : 
+	FACT on("box_A", "table");
+	System.out.println("---------Start constraints_test03---------");
+
+	System.out.println("---------constraints_test03 succeed---------");
+	
+FAILURE :
+	System.out.println("---------constraints_test03 failed---------");
+}

@@ -1,0 +1,16 @@
+import kgu.uos.ai.jam.tutorial.*;
+
+GOALS :
+	PERFORM import_test();
+
+PLAN PERFORM import_test(){
+
+BODY :
+	System.out.println("----------> Start import_test");
+	
+	$cal = new Calculator();
+	System.out.println("result : " + $cal.add(3,5));
+
+	System.out.println("----------> Finished import_test");
+}
+

@@ -5,6 +5,9 @@ import org.ros.node.ConnectedNode;
 import org.ros.node.Node;
 import org.ros.node.NodeMain;
 
+import uos.ai.jam.Interpreter;
+import uos.ai.jam.JAM;
+
 public class JamNode implements NodeMain {
 
 	@Override
@@ -28,13 +31,14 @@ public class JamNode implements NodeMain {
 	@Override
 	public void onStart(ConnectedNode arg0) {
 		// TODO Auto-generated method stub
-
+		Interpreter i = JAM.parse("tutorial/tutorial_StockRoom/simul");
+		i.run();
 	}
 
 	@Override
 	public GraphName getDefaultNodeName() {
 		// TODO Auto-generated method stub
-		return null;
+		return GraphName.of("rosjava/JAM");
 	}
 
 }

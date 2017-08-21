@@ -1,0 +1,9 @@
+GOALS :
+	PERFORM function_call_test();
+
+PLAN PERFORM function_call_test(){
+
+	BODY :
+		EXECUTE kgu.uos.ai.jam.tutorial.Printer.print("Hello !");
+
+}

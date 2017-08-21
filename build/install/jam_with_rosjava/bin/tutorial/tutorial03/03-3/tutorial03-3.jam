@@ -1,0 +1,31 @@
+GOALS :
+	PERFORM perform_goal_test;
+		
+PLAN PERFORM perform_goal_test{
+
+BODY :
+	System.out.println("---------Start perform_goal_test---------");
+
+	System.out.println("test!!!");
+	System.out.println("test!!!");
+		
+	ASSERT conclude_goal_test;
+		
+	System.out.println("test!!!");
+	System.out.println("test!!!");
+	System.out.println("test!!!");
+	
+	System.out.println("---------Finished perform_goal_test---------");
+
+}
+
+PLAN CONCLUDE conclude_goal_test{
+
+BODY :
+	System.out.println("---------Start conclude_goal_test---------");
+	
+	System.out.println("---------Finished conclude_goal_test---------");
+	
+UTILITY : 10000;
+
+}

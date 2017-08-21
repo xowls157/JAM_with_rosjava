@@ -1,0 +1,39 @@
+
+
+Plan: {
+	GOAL: PERFORM CreateDummyUserInfo $count;
+	BODY:
+		ASSIGN $index 0;
+		WHILE : TEST (< $index $count) {
+			ASSIGN $personId (+ "PERSON" $index);
+			EXECUTE ranromString $name;
+			EXECUTE randomNumber 27 5 $age;
+			ASSIGN $sex "male";
+			WHEN : TEST (== 0 (% $index 2)) {
+				ASSIGN $sex "female";
+			};
+			ASSERT Person $personId $name $age $sex;
+			EXECUTE print "Person[" $personId "] name=" $name ", age=" $age ", sex=" $sex "\n";
+			ASSIGN $index (+ $index 1);
+		};
+}
+
+
+import uos.ai.util.RandomUtil;
+
+Plan: {
+	GOAL: PERFORM CreateDummyUserInfo $count;
+	BODY:
+		$randomUtil = new RandomUtil(); 
+		for ($index = 0; $index < $count; $index = $index + 1) {
+			$personId = "PERSON" + $index;
+			$name = $randomUtil.createRandomName();
+			$age = $randomUtil.createRandomAge(27, 5);
+			$sex = "male";
+			if ($index % 2 == 0) {
+				$sex = "female";
+			}
+			ASSERT Person $personId $name $age $sex;
+			System.out.println("Person[" + $personId + "] name=" + $name + ", age=" + $age + ", sex=" + $sex); 
+		}
+}
