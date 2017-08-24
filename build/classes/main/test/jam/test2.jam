@@ -1,0 +1,23 @@
+import model.user.Person;
+import model.data.*;
+
+GOALS:
+	PERFORM Greeting "PERSON001";
+	PERFORM RegisterUser "PERSON001" "È«±æµ¿" 27 "µ¿´ë¹®±¸";
+
+Plan: {
+	GOAL: PERFORM Greeting $personId;
+	PRECONDITION:
+		FACT UserInfo $personId $personObject;
+	BODY:
+		System.out.println("log::greeting " + $personId);
+		PERFPRM say ("¾È³çÇÏ¼¼¿ä, " + $personObject.getName() + " ´Ô! ¹Ý°©½À´Ï´Ù.");
+}
+
+Plan: {
+	GOAL: PERFORM RegisterUser $personId $name $age $address;
+	BODY: 
+		$personObject = new Person($personId, $name, $age);
+		$personObject.addAddress(new Address($address));
+		ASSERT UserInfo $personId $personObject; 
+}

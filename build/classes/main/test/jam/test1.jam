@@ -1,0 +1,148 @@
+import test.*;
+
+GOALS:
+	PERFORM Test;
+
+Plan PERFORM Test {
+	BODY:
+		System.out.println("Hello World!");
+		$utility = 10.5;
+		POST PERFORM Test2 :UTILITY $utility;
+}
+
+Plan PERFORM Test2 {
+	BODY:
+		System.out.println("안녕하세요!");
+}
+
+
+Plan PERFORM GogoException {
+	BODY:
+		System.out.println("GogoException IN");
+		throw new agent.model.Exception("HELLO");
+		System.out.println("GogoException OUT");
+}
+
+
+Plan CONCLUDE TestFact1($x, $y) {
+	BODY:
+		System.out.println("HELLO!");
+}
+
+Plan PERFORM TestGoal1($x, $y) {
+	BODY: 
+		System.out.println("////////////////////////////////////////////");
+		System.out.println("TestGoal1:: " + $x + ", " + $y);
+
+		// ASSIGN  
+		
+		$sum = ($x + $y);
+		
+		// ClassOperation
+		
+		EXECUTE `print("합 = " + $sum + "\n");
+		System.out.println("합 = " + $sum);
+
+		// IF-THEN-ELSE
+
+		if ($sum >= 500) {
+			System.out.println("합이 500 이상입니다.");
+		} else if ($sum >= 350) {
+			System.out.println("합이 350 이상입니다.");
+		} else {
+			System.out.println("합이 350 미만입니다.");
+		}
+}
+
+Plan PERFORM TestGoal2($value, $msg) {
+	BODY:
+		System.out.println("////////////////////////////////////////////");
+		System.out.println("TestGoal2:: " + $value + ", " + $msg);
+		
+		// Object Allocation
+		
+		$obj = new Test(100);
+		
+		// Object Operation
+		
+		$obj.print();
+		$obj.print("반갑습니다");
+		$obj.print($msg);
+		
+		// Return Value
+		
+		$return = $obj.getSum(150, 350);
+		System.out.println("getSum():: " + $return);
+		System.out.println("getSum()+100:: " + $return + 100);
+		
+		// Get Field
+		
+		$return = $obj.getValue();
+		System.out.println("ReturnValue = " + $return);
+		
+		$obj.setValue(200);
+		$return = $obj.getValue();
+		System.out.println("ReturnValue = " + $return);
+
+		// Static Operation
+		
+		$obj.staticPrint();		
+		
+		// Boolean
+		
+		if ($obj.getTrue()) {
+			System.out.println("TRUE!!!");
+		}
+		
+		if (!$obj.getFalse()) {
+			System.out.println("TRUE!!!");
+		} else {
+			System.out.println("FALSE!!!");
+		}
+		
+}
+
+Plan PERFORM TestGoal3 {
+	BODY:
+		System.out.println("////////////////////////////////////////////");
+	
+		$address1 	= new Address("120-136", "저기 어딘가");
+		$person1 	= new Person("길동", "홍", 27, $address1);
+		$person2 	= new Person("홍만", "최", 40, new Address("130-127", "지구 한 가운데"));
+
+		System.out.println($person1 + "(" + $person1.getAge() + ")");
+		System.out.println("\t AddressDetail: " + $person1.getAddress().getDetail());
+		System.out.println("\t ZipCode: " + $person1.getAddress().getZipCode());
+
+		System.out.println($person2 + "(" + $person2.getAge() + ")");
+		System.out.println("\t Address: " + $person2.getAddress());
+		
+		//
+		
+		if ($person1.getAge() < $person2.getAge()) {
+			System.out.println($person1 + " (이)가 " + $person2 + " 보다 어립니다.");
+		} else if ($person1.getAge() == $person2.getAge()) {
+			System.out.println("둘의 나이가 같습니다.");
+		} else {
+			System.out.println($person1 + " (이)가 " + $person2 + " 보다 나이가 많습니다.");
+		}
+		
+}
+
+Plan PERFORM TestGoal4($count) {
+	BODY:
+		System.out.println("////////////////////////////////////////////");
+	
+		/*
+		$i = 0;
+		while : is_true $i < $count {	
+			System.out.println("FOR_LOOP[" + $i + "]");
+			$i = $i + 1;
+		};
+		*/
+	
+		for ($i = 5; $i < $count; $i = $i + 1) {
+			System.out.println("FOR_LOOP[" + $i + "]");
+		}
+	
+}

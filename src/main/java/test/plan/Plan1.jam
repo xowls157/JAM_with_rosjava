@@ -1,0 +1,11 @@
+package test.plan;
+
+plan Plan1 {
+	goal: PERFORM PrintMessage $message $count;
+	body: {
+		System.out.println("----------[ Plan1 ]-----------");
+		for ($i = 0; $i < $count; $i = $i + 1) {
+			System.out.println("message: " + $message);
+		}
+	}
+}
