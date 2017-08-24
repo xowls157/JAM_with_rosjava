@@ -1,9 +1,12 @@
 package com.github.rosjava_pkg_skku.jam_with_rosjava;
 
+import org.apache.commons.logging.Log;
+import org.ros.message.MessageListener;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import org.ros.node.Node;
 import org.ros.node.NodeMain;
+import org.ros.node.topic.Subscriber;
 
 import uos.ai.jam.Interpreter;
 import uos.ai.jam.JAM;
@@ -30,8 +33,12 @@ public class JamNode implements NodeMain {
 
 	@Override
 	public void onStart(ConnectedNode arg0) {
-		// TODO Auto-generated method stub
-		Interpreter i = JAM.parse("tutorial/tutorial_StockRoom/simul");
+		// TODO adding Listener, Talker class.  
+		
+		//adding subscriber and publisher to communicate.
+		new NodeCommunicator(arg0);
+		
+		Interpreter i = JAM.parse("/home/tj/rosjava/rosjava_ws_skku/tutorial/tutorial_StockRoom/simul");
 		i.run();
 	}
 
