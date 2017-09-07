@@ -29,12 +29,14 @@ public class JamNode implements NodeMain {
 	}
 
 	@Override
+	//노드실행부분
 	public void onStart(ConnectedNode arg0) {
 		// TODO adding Listener, Talker class.  
 		
 		//adding subscriber and publisher to communicate.
 		new NodeCommunicator(arg0);
 		
+		//jam 파일이 존재하는 경로를 설정해야 실행됨.
 		Interpreter i = JAM.parse("/home/tj/rosjava/rosjava_ws_skku/tutorial/MyTutorial");
 		System.out.println("parising completed");
 		i.run();
